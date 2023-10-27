@@ -21,7 +21,10 @@ const expense= sequelize.define('user', {
     
     
   },
-  phone:Sequelize.STRING,
+  phone:{
+    type:Sequelize.STRING,
+    unique:true
+  },
   password:{
     type:Sequelize.STRING,
    
