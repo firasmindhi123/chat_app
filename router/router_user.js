@@ -1,5 +1,10 @@
 const express=require('express')
+const user_autheticate=require('../authentication')
 const router=express.Router()
 const user_controller= require('../controller/user')
+const user_chat=require('../controller/user_chat')
 router.post('/signup',user_controller.signup)
+router.post('/login',user_controller.login)
+router.post('/chat',user_autheticate.authenticate,user_chat.chat)
+router.get('/getdata',user_autheticate.authenticate,user_chat.getchat)
 module.exports=router

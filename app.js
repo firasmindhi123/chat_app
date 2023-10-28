@@ -5,17 +5,24 @@ const root_dir=require('./util/path')
 const sequelize=require('./util/database')
 const user_router=require('./router/router_user')
 const cors= require('cors')
+const authenticate_user=require('./authentication')
+const user_model=require('./model/model_user')
+const chat_model=require('./model/model_chat')
  const app=express()
  app.use(bodyparse.urlencoded({extended:false}))
 app.use(bodyparse.json())
 app.use(cors({origin:'*'}))
 app.use(express.static(path.join(__dirname,'public')))
+
  
  app.use('/user',user_router)
  app.use((req,res)=>{
     console.log(req.url)
 res.sendFile(path.join(__dirname,`public/${req.url}`))
 })
+
+ user_model.hasMany(chat_model)
+ chat_model.belongsTo(user_model)
     sequelize.sync().then(result=>{
    
         app.listen(3000)
