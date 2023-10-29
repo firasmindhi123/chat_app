@@ -30,23 +30,24 @@ const parseJwt = (token) => {
   function messagebox(my_obj,name)
   {
     let parentelement =document.getElementById('messageArea');
-    parentelement.style.backgroundColor="pink"
     let para=document.createElement('p')
     para.style.textAlign="left"
     para.innerHTML=`<h5>${my_obj.message}:- ${name} </h5>`
     parentelement.appendChild(para)
   }
-  window.addEventListener("DOMContentLoaded",()=>{
-    const token=localStorage.getItem('token')
-  
-    const parsetoken=parseJwt(token)
+ 
+
+    setInterval(async()=>{
+      const token=localStorage.getItem('token')
+      await axios.get(`http://localhost:3000/user/getdata`,{headers:{"Authorization":token}}).then((response)=>{
+        console.log(response.data.chat_data)
+        let parentelement=document.getElementById('messageArea')
+        parentelement.innerHTML="";
+        for(var i=0;i<response.data.chat_data.length;i++){
+          
+          messagebox(response.data.chat_data[i],response.data.chat_data[i].user.name)
     
-    axios.get(`http://localhost:3000/user/getdata`,{headers:{"Authorization":token}}).then((response)=>{
-      console.log(response.data.chat_data)
-      for(var i=0;i<response.data.chat_data.length;i++){
-        messagebox(response.data.chat_data[i],response.data.chat_data[i].user.name)
-  
-      }}).catch(err=>{
-        console.log(err)
-      })
-    })
+        }}).catch(err=>{
+          console.log(err)
+        })  
+    },1000)

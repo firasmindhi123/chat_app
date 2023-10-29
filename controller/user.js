@@ -12,8 +12,8 @@ function IsStringInvalid(str)
         return false
     }
 }
-function generateAccesstoken(id,ispremium){
-    return jwt.sign({userid:id},'securatewq')
+function generateAccesstoken(id,name){
+    return jwt.sign({userid:id,username:name},'securatewq')
   }
 
 exports.signup=async(req,res,next)=>{
@@ -78,17 +78,17 @@ exports.signup=async(req,res,next)=>{
                 console.log(a)
                 
     
-                res.status(200).json({success:true,message:"login successfull",token:generateAccesstoken(a[0].id)})
+                res.status(200).json({success:true,message:"login successfull",token:generateAccesstoken(a[0].id,a[0].name)})
             }
             else{
-             res.status(402).json({success:false,message:"password is wrong"})
+             res.status(401).json({success:false,message:"password is wrong"})
             }
             })
            
         }
         else{
             
-            res.status(404).json({success:false,message:'email is wrong'})
+            res.status(404).json({success:false,message:'user doesnt exist'})
            
         }
     }catch(err){

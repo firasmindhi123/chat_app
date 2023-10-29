@@ -33,9 +33,12 @@ exports.getchat=async(req,res)=>{
     const user_chat=await chat_model.findAll({
       include:[
         {
-          model:user_model
+          model:user_model,
+          attributes:['name']
+          
         }
-      ]
+      ],
+
     })
     res.status(200).json({chat_data:user_chat})
    }catch{
