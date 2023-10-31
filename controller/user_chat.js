@@ -1,5 +1,6 @@
 const user_model=require('../model/model_user')
 const chat_model=require('../model/model_chat')
+const { Op } = require("sequelize")
 function IsStringInvalid(str)
 {
     if(str==undefined||str.length===0)
@@ -30,7 +31,13 @@ exports.chat=async(req,res)=>{
 }
 exports.getchat=async(req,res)=>{
     try{
+      const a=req.query.id
+      console.log(req.query.id)
     const user_chat=await chat_model.findAll({
+      attributes:['id','message'],
+      where:{
+        id: {[Op.gt]: a}
+      },
       include:[
         {
           model:user_model,
@@ -40,6 +47,7 @@ exports.getchat=async(req,res)=>{
       ],
 
     })
+    console.log(user_chat)
     res.status(200).json({chat_data:user_chat})
    }catch{
     res.status(404).json({message:"data not found"})
