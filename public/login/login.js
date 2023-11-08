@@ -15,7 +15,7 @@ form.addEventListener('submit', onsubmit)
 
  let response =await axios.post("http://localhost:3000/user/login",my_obj)
   localStorage.setItem('token',response.data.token)
-     window.location.href="../chat/chat.html"
+     window.location.href="../group/group.html"
    
    
  }
