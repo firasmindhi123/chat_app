@@ -1,7 +1,7 @@
 const express=require('express')
 const path =require('path')
 const bodyparse=require('body-parser')
-const root_dir=require('./util/path')
+
 const sequelize=require('./util/database')
 const user_router=require('./router/router_user')
 const group_router=require('./router/router_group')
