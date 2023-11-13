@@ -1,6 +1,7 @@
 const user_model=require('../model/model_user')
 const chat_model=require('../model/model_chat')
 const group_model=require('../model/model_group')
+const group_table=require('../model/group_table')
 const { Op } = require("sequelize")
 const path=require('path')
 const root_dir=require('../util/path')
@@ -24,10 +25,16 @@ exports.group=async(req,res)=>{
   {
       return res.status(401).json({message:"something missing"})
   }
+ 
  const data=await req.user.createGroup({
-  group_name:group
+  
+  group_name:group,
+ 
  })
-  res.status(201).json({userdata:data})
+ 
+ const admin=await group_table.update({isadmin:true},{where:{userId:req.user.id,groupId:data.id}})
+ console.log(admin)
+  res.status(201).json({userdata:data,admin})
  }catch(err){
   console.log(err)
   res.status(501).json({message:"something went wrong"})
@@ -78,6 +85,9 @@ let message=await req.user.createChat({
 
  message:group_message,
  groupId:group.id
+})
+let admin=group_model.update({isadmin:true},{where:{
+  userId:req.user.id,groupId:group.id}
 })
 const name=req.user.name
 res.status(201).json({userdata:{message,name}})

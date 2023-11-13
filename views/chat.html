@@ -17,7 +17,19 @@
 <body>
 <div class="row">
   <div class="col-1"></div>
-	<div class="col-3"> </div>
+	<div class="col-3">
+		<div class="container">
+			<h1 class="logo">group</h1>
+		 <form class="form-inline" id="group_form">
+			<div class="form-group mb-1">
+			<input class="input" type="text" placeholder="group name" id="group_name">
+			</div>
+			
+			<button class="button">add group</button>
+			
+		 </form>
+		</div>
+	</div>
 	<div class="col-4"></div>
 	  <div class="col-3" >
 		<div class="container">
@@ -35,19 +47,12 @@
 	<div class="col-1"></div>
 	<div class="col-3">
 		<form class="form-inline" id="add_user">
-         <input type="hidden" id="hidden" >  
 		<input class="input" type="text" placeholder="enter user email" id="user_email">
 			<button class="button">add user</button>
 			
 			</form>
 	</div>
-<div class="col-4">
-	<form class="form-inline" id="admin">  
-	   <input class="input" type="text" placeholder="make admin" id="mail">
-		   <button class="button">make admin</button>
-		   
-		   </form>
-</div>
+<div class="col-4"></div>
 	<div class="row-3" id="messageArea">
 		
 	</div>
@@ -61,7 +66,7 @@
 		 </div>
 </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
-    <script src="group_chat.js" type="text/javascript"> </script>
+    <script src="chat.js" type="text/javascript"> </script>
 </body>
 
 </html>

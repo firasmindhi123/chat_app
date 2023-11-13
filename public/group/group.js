@@ -59,7 +59,7 @@ else{
 }
 const token=localStorage.getItem('token')
 await axios.post('http://localhost:3000/user/group',my_group,{headers:{"Authorization":token}}).then(res=>{
-  console.log(res.data.userdata.group_name)
+  console.log(res.data.userdata.group_name,res.data.admin)
   group_link(res.data.userdata.group_name)
 })
    }
