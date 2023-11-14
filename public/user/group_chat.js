@@ -74,13 +74,30 @@ window.addEventListener("DOMContentLoaded",async()=>{
   let add_user=document.getElementById('add_user')
   add_user.addEventListener('submit',adduser)
    function adduser(e){
+    const token= localStorage.getItem('token')
     e.preventDefault()
     let user_add=document.getElementById('user_email').value
     let user_obj={
       user_add
     }
     
-    axios.post(`http://localhost:3000/group/add_member?group=${group_name}`,user_obj).then(response=>{
+    axios.post(`http://localhost:3000/group/add_member?group=${group_name}`,user_obj,{headers:{"Authorization":token}}).then(response=>{
       console.log(response)
+    })
+   }
+   // make admin
+
+   const admin=document.getElementById('admin')
+   admin.addEventListener('submit',makeadmin)
+   function makeadmin(e)
+   {
+    const token=localStorage.getItem('token')
+    e.preventDefault()
+    const person =document.getElementById('mail').value
+    const admin_obj={
+     person
+    }
+    axios.post(`http://localhost:3000/group/admin?group=${group_name}`,admin_obj,{headers:{"Authorization":token}}).then(res=>{
+      console.log(res)
     })
    }

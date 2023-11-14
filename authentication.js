@@ -14,6 +14,6 @@ exports.authenticate=(req,res,next)=>{
     catch(err)
     {
         console.log(err)
-        return res.status(402).json({message:"you are user"})
+        return res.status(402).json({message:"you are not authorize user"})
     }
 }
