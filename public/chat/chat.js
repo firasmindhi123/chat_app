@@ -12,7 +12,7 @@ function onsubmit(e)
  
  
  
- axios.post("http://localhost:3000/user/chat",my_obj,{headers:{"Authorization":token}}).then((response)=>{
+ axios.post("http://16.171.235.235:3000/user/chat",my_obj,{headers:{"Authorization":token}}).then((response)=>{
  console.log(response.data.userdata.data)
   messagebox(response.data.userdata.data,response.data.userdata.name)
 }).catch((err)=>console.log(err))
@@ -53,7 +53,7 @@ else{
   
    
   setTimeout(async()=>{console.log(last_message)
-    await  axios.get(`http://localhost:3000/user/getdata?id=${last_message}`,{headers:{"Authorization":token}}).then((response)=>{
+    await  axios.get(`http://16.171.235.235:3000/user/getdata?id=${last_message}`,{headers:{"Authorization":token}}).then((response)=>{
       
      
     let message_array=parse_message
@@ -85,7 +85,7 @@ else{
 
     // setInterval(async()=>{
     //   const token=localStorage.getItem('token')
-    //   await axios.get(`http://localhost:3000/user/getdata`,{headers:{"Authorization":token}}).then((response)=>{
+    //   await axios.get(`http://16.171.235.235:3000/user/getdata`,{headers:{"Authorization":token}}).then((response)=>{
     //     console.log(response.data.chat_data)
     //     let parentelement=document.getElementById('messageArea')
     //     parentelement.innerHTML="";
