@@ -24,7 +24,7 @@ else{
   last_group=0
 }
 
-    await  axios.get(`http://localhost:3000/user/getgroup?group=${last_group}`,{headers:{"Authorization":token}}).then((response)=>{
+    await  axios.get(`http://16.171.235.235:3000/user/getgroup?group=${last_group}`,{headers:{"Authorization":token}}).then((response)=>{
       console.log(response)
      
     let message_array=parse_group
@@ -58,7 +58,7 @@ else{
       group_name
 }
 const token=localStorage.getItem('token')
-await axios.post('http://localhost:3000/user/group',my_group,{headers:{"Authorization":token}}).then(res=>{
+await axios.post('http://16.171.235.235:3000/user/group',my_group,{headers:{"Authorization":token}}).then(res=>{
   console.log(res.data.userdata.group_name,res.data.admin)
   group_link(res.data.userdata.group_name)
 })
@@ -68,7 +68,7 @@ await axios.post('http://localhost:3000/user/group',my_group,{headers:{"Authoriz
     let group_name=obj
     console.log(group_name)
     let present_group=document.getElementById('group_link')
-   let new_group= `<a href=http://localhost:3000/user/group_chat?group_chat=${group_name}>`+`${group_name}`+`</a>`+'<br>'
+   let new_group= `<a href=http://16.171.235.235:3000/user/group_chat?group_chat=${group_name}>`+`${group_name}`+`</a>`+'<br>'
    present_group.innerHTML+=new_group
    console.log(present_group)
   }
