@@ -13,7 +13,7 @@ form.addEventListener('submit', onsubmit)
     }
 
 
- let response =await axios.post("http://localhost:3000/user/login",my_obj)
+ let response =await axios.post("http://16.171.235.235:3000/user/login",my_obj)
   localStorage.setItem('token',response.data.token)
      window.location.href="../group/group.html"
    

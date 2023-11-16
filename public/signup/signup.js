@@ -17,7 +17,7 @@ async function onsubmit(e)
 
 
 
- let response= await axios.post("http://localhost:3000/user/signup",my_obj)
+ let response= await axios.post("http://16.171.235.235:3000/user/signup",my_obj)
  if(response.status===201)
  {
   window.location.href="../login/login.html"
