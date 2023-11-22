@@ -1,5 +1,7 @@
 const searchParams = new URLSearchParams(window.location.search);
 let group_name=searchParams.get('group_chat');
+import { io } from 'socket.io-client'
+const socket=io('http://localhost:3000')
 
 const group_place= document.getElementById('hidden')
 group_place.value=group_name
@@ -15,7 +17,7 @@ async function addon(e)
         hidden,
         message
     }
-await axios.post('http://16.171.235.235:3000/user/group_chat',obj,{headers:{"Authorization":token}}).then(response=>{
+await axios.post('http://localhost:3000/user/group_chat',obj,{headers:{"Authorization":token}}).then(response=>{
   console.log(response.data.userdata)
   messagebox(response.data.userdata.message,response.data.userdata.name)
 })
@@ -37,7 +39,7 @@ window.addEventListener("DOMContentLoaded",async()=>{
       last_group=0
     }
   
-      await  axios.get(`http://16.171.235.235:3000/group/getdata?group=${group_name}&&message=${last_group}`,{headers:{"Authorization":token}}).then((response)=>{
+      await  axios.get(`http://localhost:3000/group/getdata?group=${group_name}&&message=${last_group}`,{headers:{"Authorization":token}}).then((response)=>{
         
 
         
@@ -81,7 +83,7 @@ window.addEventListener("DOMContentLoaded",async()=>{
       user_add
     }
     
-    axios.post(`http://16.171.235.235:3000/group/add_member?group=${group_name}`,user_obj,{headers:{"Authorization":token}}).then(response=>{
+    axios.post(`http://localhost:3000/group/add_member?group=${group_name}`,user_obj,{headers:{"Authorization":token}}).then(response=>{
       console.log(response)
     })
    }
@@ -97,7 +99,7 @@ window.addEventListener("DOMContentLoaded",async()=>{
     const admin_obj={
      person
     }
-    axios.post(`http://16.171.235.235:3000/group/admin?group=${group_name}`,admin_obj,{headers:{"Authorization":token}}).then(res=>{
+    axios.post(`http://localhost:3000/group/admin?group=${group_name}`,admin_obj,{headers:{"Authorization":token}}).then(res=>{
       console.log(res)
     })
    }
