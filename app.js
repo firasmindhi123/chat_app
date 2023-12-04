@@ -11,15 +11,30 @@ const group_table=require('./model/group_table')
 const user_model=require('./model/model_user')
 const chat_model=require('./model/model_chat')
 const model_group=require('./model/model_group')
-const io=require('socket.io')(3000)
+const { where } = require('sequelize')
+
  const app=express()
  app.use(bodyparse.urlencoded({extended:false}))
 app.use(bodyparse.json())
 app.use(cors({origin:'*'}))
 app.use(express.static(path.join(__dirname,'public')))
 
- 
- 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+ io.on('connection',socket=>{
+   // socket.on('name',message=>{
+   //    console.log(message.username)
+
+   // })
+   
+socket.on('message',  (message,room)=>{
+   
+socket.to(room).emit('message',message)
+})
+socket.on('join',room=>{
+   socket.join(room)
+})
+})
 app.use('/user',user_router)
 app.use('/group',group_router)
  app.use((req,res)=>{
@@ -27,9 +42,9 @@ app.use('/group',group_router)
     
 res.sendFile(path.join(__dirname,`public/${req.url}`))
 })
-io.on('connection',socket=>{
-    console.og(socket.id)
-})
+
+
+
 
  user_model.hasMany(chat_model)
  chat_model.belongsTo(user_model)
@@ -41,6 +56,5 @@ io.on('connection',socket=>{
  model_group.belongsToMany(user_model,{through:group_table})
 
     sequelize.sync().then(result=>{
-   
-        app.listen(3000)
+     http.listen(3000)
     } ).catch(err=>console.log(err))
